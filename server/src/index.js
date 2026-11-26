@@ -125,6 +125,12 @@ app.delete('/api/admin/feedback/:id', requireAdmin, async (req, res) => {
 });
 
 // --- Boot & Seed Admin ---
+const clientDist = path.resolve(__dirname, '../../client/dist');
+app.use(express.static(clientDist));
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(clientDist, 'index.html'));
+});
+
 async function start() {
   await mongoose.connect(process.env.MONGODB_URI);
   console.log('MongoDB connected:', process.env.MONGODB_URI);
