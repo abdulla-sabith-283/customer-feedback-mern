@@ -295,3 +295,46 @@ h1 {
   .stats-grid { grid-template-columns: 1fr; }
   .filters-bar { flex-direction: column; }
 }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(37, 42, 38, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.btn-danger-solid {
+  background: var(--error);
+  color: #FFFFFF;
+}
+
+.btn-danger-solid:hover {
+  opacity: 0.9;
+}

@@ -7,6 +7,9 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({ total: 0, averageRating: 0, fiveStarCount: 0 });
   const [ratingFilter, setRatingFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+  const [deleteId, setDeleteId] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem('softrate_token');
@@ -33,14 +36,21 @@ export default function AdminDashboard() {
     loadData();
   }, [loadData]);
 
-  async function handleDelete(id) {
-    if (!window.confirm('Delete this feedback permanently?')) return;
-    await fetch(`/api/admin/feedback/${id}`, {
+  async function confirmDelete() {
+  if (!deleteId) return;
+  setDeleting(true);
+  try {
+    await fetch(`/api/admin/feedback/${deleteId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     });
+    setDeleteId(null);
     loadData();
+  } finally {
+    setDeleting(false);
   }
+}
+
 
   function logout() {
     localStorage.removeItem('softrate_token');
@@ -111,9 +121,10 @@ export default function AdminDashboard() {
                     </span>
                     <span className="badge">{item.category}</span>
                   </div>
-                  <button type="button" className="btn btn-danger" onClick={() => handleDelete(item._id)}>
-                    <Trash2 size={14} /> Delete
-                  </button>
+                  <button type="button" className="btn btn-danger" onClick={() => setDeleteId(item._id)}>
+  <Trash2 size={14} /> Delete
+</button>
+
                 </div>
 
                 <p style={{ marginBottom: '10px', fontSize: '15px' }}>{item.message}</p>
@@ -126,6 +137,35 @@ export default function AdminDashboard() {
           )}
         </div>
       </main>
+         {deleteId && (
+     <div className="modal-backdrop" onClick={() => !deleting && setDeleteId(null)}>
+       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+         <h2 className="modal-title">Delete feedback?</h2>
+         <p className="meta">
+           This action cannot be undone. The feedback submission will be permanently removed.
+         </p>
+         <div className="modal-actions">
+           <button
+             type="button"
+             className="btn btn-outline"
+             disabled={deleting}
+             onClick={() => setDeleteId(null)}
+           >
+             Cancel
+           </button>
+           <button
+             type="button"
+             className="btn btn-danger-solid"
+             disabled={deleting}
+             onClick={confirmDelete}
+           >
+             {deleting ? 'Deleting...' : 'Delete'}
+           </button>
+         </div>
+       </div>
+     </div>
+   )}
+
     </>
   );
 }
