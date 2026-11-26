@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, CheckCircle2 } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
 
 const LABELS = { 1: 'Poor', 2: 'Fair', 3: 'Good', 4: 'Very good', 5: 'Excellent' };
 const CATEGORIES = [
@@ -67,6 +68,7 @@ export default function Home() {
           <span>SOFTRATE TECH</span>
         </Link>
         <div className="nav-links">
+          <ThemeToggle />
           <button type="button" className="btn btn-primary" onClick={openFeedback}>
             Customer Feedback
           </button>

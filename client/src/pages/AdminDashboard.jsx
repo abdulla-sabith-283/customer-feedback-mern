@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Star, Trash2, LogOut } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
+
 
 export default function AdminDashboard() {
   const [items, setItems] = useState([]);
@@ -60,11 +62,15 @@ export default function AdminDashboard() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="brand">SOFTRATE TECH · Dashboard</Link>
-        <button type="button" className="btn btn-outline" onClick={logout}>
-          <LogOut size={16} /> Logout
-        </button>
-      </nav>
+  <Link to="/" className="brand">SOFTRATE TECH · Dashboard</Link>
+  <div className="nav-links">
+    <ThemeToggle />
+    <button type="button" className="btn btn-outline" onClick={logout}>
+      <LogOut size={16} /> Logout
+    </button>
+  </div>
+</nav>
+
 
       <main className="container-wide">
         <div className="stats-grid">

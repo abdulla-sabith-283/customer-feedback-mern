@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import ThemeToggle from '../components/ThemeToggle';
+
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -34,9 +36,13 @@ export default function AdminLogin() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="brand">SOFTRATE TECH</Link>
-        <Link to="/" className="btn btn-outline">Back to Portal</Link>
-      </nav>
+  <Link to="/" className="brand">SOFTRATE TECH</Link>
+  <div className="nav-links">
+    <ThemeToggle />
+    <Link to="/" className="btn btn-outline">Back to Portal</Link>
+  </div>
+</nav>
+
 
       <main className="container" style={{ maxWidth: '440px' }}>
         <div className="card">

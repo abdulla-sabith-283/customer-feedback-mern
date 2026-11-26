@@ -11,6 +11,20 @@
   --error: #A34F48;
 }
 
+:root[data-theme="dark"] {
+  --bg: #161816;
+  --surface: #202320;
+  --text: #ECECE8;
+  --muted: #9BA099;
+  --border: #323632;
+  --accent: #6B8E73;
+  --accent-hover: #7DA386;
+  --accent-soft: #253027;
+  --star: #D49B4B;
+  --error: #D46A62;
+}
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -155,7 +169,7 @@ h1 {
 }
 
 .star-btn.active {
-  background: #FAF5EC;
+  background: rgba(212, 155, 75, 0.12);
   border-color: var(--star);
 }
 
@@ -214,7 +228,7 @@ h1 {
 }
 
 .btn-danger:hover {
-  background: #FDF4F3;
+  background: rgba(212, 106, 98, 0.12);
   border-color: var(--error);
 }
 
